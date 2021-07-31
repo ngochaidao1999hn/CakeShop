@@ -1,7 +1,14 @@
+using CakeShop.Application.Query;
+using CakeShop.Domain.Interfaces;
+using CakeShop.Infrastructure;
+using CakeShop.Infrastructure.EF;
+using CakeShop.Infrastructure.Repositories;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,7 +33,10 @@ namespace CakeShop.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddDbContext<CakeShopDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("CakeShopConnectionString")));
+            services.AddMediatR(typeof(GetAllProductQuery).Assembly);
+            services.AddTransient<IUnitofWork, UnitofWork>();
+            services.AddTransient<IProductRepository, ProductRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
