@@ -18,10 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Command\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\CakeShop.Domain\CakeShop.Domain.csproj" />
     <ProjectReference Include="..\CakeShop.Infrastructure\CakeShop.Infrastructure.csproj" />
   </ItemGroup>

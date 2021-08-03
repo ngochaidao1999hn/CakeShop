@@ -15,6 +15,7 @@ namespace CakeShop.Domain.Entities
         public string LastName { get; set; }
 
         public DateTime Dob { get; set; }
+        public string Adress { get; set; }
 
         public List<Order> Orders { get; set; }
 

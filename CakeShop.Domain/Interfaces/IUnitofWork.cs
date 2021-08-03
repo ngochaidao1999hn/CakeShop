@@ -9,6 +9,7 @@ namespace CakeShop.Domain.Interfaces
     public interface IUnitofWork
     {
         public IProductRepository productRepository { get; }
+        public IUserRepository userRepository { get; }
         Task Commit();
     }
 }

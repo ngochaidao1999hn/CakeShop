@@ -9,6 +9,6 @@ namespace CakeShop.Domain.Interfaces
 {
     public interface IProductRepository:IRepository<Product>
     {
-
+        Task<IEnumerable<Product>> GetProductWithPage(int Page);
     }
 }

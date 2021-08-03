@@ -22,5 +22,9 @@ namespace CakeShop.Api.Controllers
         public async Task<IActionResult> GetAll() {
            return Ok(await _mediator.Send(new GetAllProductQuery()));
         }
+        [HttpGet("{PageNumber}")]
+        public async Task<IActionResult> GetProductByPageNumber(int PageNumber) {
+            return Ok(await _mediator.Send(new GetListProductWithPageNumberQuery(PageNumber)));
+        }
     }
 }

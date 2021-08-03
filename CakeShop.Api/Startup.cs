@@ -1,4 +1,5 @@
 using CakeShop.Application.Query;
+using CakeShop.Domain.Entities;
 using CakeShop.Domain.Interfaces;
 using CakeShop.Infrastructure;
 using CakeShop.Infrastructure.EF;
@@ -7,6 +8,7 @@ using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -34,14 +36,21 @@ namespace CakeShop.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<CakeShopDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("CakeShopConnectionString")));
+            services.AddIdentity<User, Role>().AddEntityFrameworkStores<CakeShopDbContext>().AddDefaultTokenProviders();
             services.AddMediatR(typeof(GetAllProductQuery).Assembly);
             services.AddTransient<IUnitofWork, UnitofWork>();
             services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<UserManager<User>, UserManager<User>>();
+            services.AddTransient<SignInManager<User>, SignInManager<User>>();
+            services.AddTransient<RoleManager<Role>, RoleManager<Role>>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CakeShop.Api", Version = "v1" });
             });
+            //    string issuer = Configuration.GetValue<string>("Tokens:Issuer");
+            //    string signingKey = Configuration.GetValue<string>("Tokens:Key");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

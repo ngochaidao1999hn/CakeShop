@@ -11,7 +11,7 @@ namespace CakeShop.Infrastructure.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        private CakeShopDbContext _context;
+        public CakeShopDbContext _context;
         private DbSet<T> DbSet;
         public Repository(CakeShopDbContext context) {
             _context = context;
