@@ -37,5 +37,10 @@ namespace CakeShop.Api.Controllers
             }
             return Ok(await _mediator.Send(new RegisterCommand(registerinfo)));
         }
+        [HttpGet("GetById")]
+        public async Task<IActionResult> GetById(Guid Id) {
+            return Ok(await _mediator.Send(new GetUserByIdQuery(Id)));
+        }
+
     }
 }

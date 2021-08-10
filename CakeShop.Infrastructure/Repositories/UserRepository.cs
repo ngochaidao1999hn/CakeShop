@@ -42,19 +42,19 @@ namespace CakeShop.Infrastructure.Repositories
                 if (result.Succeeded)
                 {
                     var role = await _usermanager.GetRolesAsync(user);
-                    //IEnumerable<Claim> claims = new Claim[] {
-                    //    new Claim("email",user.Email),
-                    //    new Claim("name",user.FirstName),
-                    //    new Claim("role",role.FirstOrDefault())
-                    //};
+                    var claims = new Claim[] {
+                        new Claim(ClaimTypes.Email,user.Email),
+                        new Claim(ClaimTypes.Name,user.FirstName),
+                        //new Claim(ClaimTypes.Role,role.FirstOrDefault())
+                    };
                     //Generate JSONWebToken
                     var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
                     var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
                     var token = new JwtSecurityToken(_config["Jwt:Issuer"],
                       _config["Jwt:Issuer"],
-                      null,
-                      expires: DateTime.Now.AddMinutes(120),
+                      claims,
+                      expires: DateTime.Now.AddHours(2),
                       signingCredentials: credentials);
 
                     return new JwtSecurityTokenHandler().WriteToken(token);
@@ -68,6 +68,11 @@ namespace CakeShop.Infrastructure.Repositories
             {
                 return null;
             }
+        }
+
+        public async Task<User> GetByGuid(Guid uid)
+        {
+            return await _usermanager.FindByIdAsync(uid.ToString());
         }
 
         public async Task<bool> Register(RegisterInfo registerinfo)

@@ -16,6 +16,11 @@ namespace CakeShop.Infrastructure.Repositories
         
         }
 
+        public async Task<IEnumerable<Product>> GetProductListWithCategory(int Cate_id)
+        {
+            return await _context.Products.Where(pro => pro.Pro_Category == Cate_id).ToListAsync();
+        }
+
         public async Task<IEnumerable<Product>> GetProductWithPage(int Page)
         {
             int Skip = 6 * (Page - 1);

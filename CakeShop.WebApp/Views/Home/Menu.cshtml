@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Product>;
+@using CakeShop.Domain.Entities;
+@using System.Globalization;
+@{
+    ViewData["Title"] = "Our Menu";
+    double HalfofProducts = Model.Count() / 2;
+}
+<section class="banner_area">
+    <div class="container">
+        <div class="banner_text">
+            <h3>Menu</h3>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+            </ul>
+        </div>
+    </div>
+</section>
+<section class="price_list_area p_100">
+    <div class="container">
+        <div class="price_list_inner">
+            <div class="single_pest_title">
+                <h2>Our Price List</h2>
+                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="discover_item_inner">
+                        @foreach (var item in Model.Skip(0).Take((int)Math.Ceiling(HalfofProducts)))
+                        {
+                            <div class="discover_item">
+                                <h4>@item.Pro_Name</h4>
+                                <p>@item.Pro_Description<span>@item.Pro_Price.ToString("C0", new CultureInfo("vi-VN"))</span></p>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="discover_item_inner">
+                        @foreach (var item in Model.Skip((int)Math.Ceiling(HalfofProducts)).Take((int)Math.Ceiling(HalfofProducts)))
+                        {
+                            <div class="discover_item">
+                                <h4>@item.Pro_Name</h4>
+                                <p>@item.Pro_Description<span>@item.Pro_Price.ToString("C0", new CultureInfo("vi-VN"))</span></p>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="row our_bakery_image">
+                <div class="col-md-4 col-6">
+                    <img class="img-fluid" src="~/img/our-bakery/bakery-1.jpg" alt="">
+                </div>
+                <div class="col-md-4 col-6">
+                    <img class="img-fluid" src="~/img/our-bakery/bakery-2.jpg" alt="">
+                </div>
+                <div class="col-md-4 col-6">
+                    <img class="img-fluid" src="~/img/our-bakery/bakery-3.jpg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

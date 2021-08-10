@@ -22,7 +22,7 @@ namespace CakeShop.Infrastructure.Repositories
             DbSet.Add(entity);
         }
 
-        public void Delete(int id)
+        public void Delete<Datatype>(Datatype id)
         {
             DbSet.Remove( DbSet.Find(id));
         }
@@ -32,7 +32,7 @@ namespace CakeShop.Infrastructure.Repositories
             return await DbSet.ToListAsync();
         }
 
-        public async Task<T> GetById(int Id)
+        public async Task<T> GetById<Datatype>(Datatype Id)
         {
             return await DbSet.FindAsync(Id);
         }

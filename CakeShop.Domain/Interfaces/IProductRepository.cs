@@ -10,5 +10,6 @@ namespace CakeShop.Domain.Interfaces
     public interface IProductRepository:IRepository<Product>
     {
         Task<IEnumerable<Product>> GetProductWithPage(int Page);
+        Task<IEnumerable<Product>> GetProductListWithCategory(int Cate_id);
     }
 }

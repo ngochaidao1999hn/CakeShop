@@ -26,5 +26,14 @@ namespace CakeShop.Api.Controllers
         public async Task<IActionResult> GetProductByPageNumber(int PageNumber) {
             return Ok(await _mediator.Send(new GetListProductWithPageNumberQuery(PageNumber)));
         }
+        [HttpGet("GetById")]
+        public async Task<IActionResult> GetProductById(int id) {
+            return Ok(await _mediator.Send(new GetProductByIdQuery(id)));
+        }
+        [HttpGet("GetByCategory")]
+        public async Task<IActionResult> GetProductByCategory(int Cate_id)
+        {
+            return Ok(await _mediator.Send(new GetProductWithCategoryQuery(Cate_id)));
+        }
     }
 }
