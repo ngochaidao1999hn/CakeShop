@@ -16,23 +16,8 @@ namespace CakeShop.Infrastructure
     {
         private bool disposedValue;
         private CakeShopDbContext _context;
-        private readonly UserManager<User> _usermanager;
-        private readonly SignInManager<User> _signinmanager;
-        private readonly RoleManager<Role> _rolemanager;
-        private readonly IConfiguration _config;
-
-        public IProductRepository productRepository { get; set; }
-
-        public IUserRepository userRepository { get; set; }
-
-        public UnitofWork(CakeShopDbContext context,UserManager<User>userManager,SignInManager<User>signInManager,RoleManager<Role>roleManager,IConfiguration config) {
-            _context = context;
-            _usermanager = userManager;
-            _signinmanager = signInManager;
-            _rolemanager = roleManager;
-            _config = config;
-            productRepository = new ProductRepository(_context);
-            userRepository = new UserRepository(_usermanager,_signinmanager,_rolemanager,_config,_context);
+        public UnitofWork(CakeShopDbContext context) {
+            _context = context;          
         }
 
         public async Task Commit()

@@ -13,14 +13,14 @@ namespace CakeShop.Application.Handler
 {
     public class LoginCommandHandler : IRequestHandler<LoginCommand, string>
     {
-        private IUnitofWork _unitofwork;
-        public LoginCommandHandler(IUnitofWork unitofwork)
+        private IUserRepository _userRepository;
+        public LoginCommandHandler(IUserRepository userRepository)
         {
-            _unitofwork = unitofwork;
+            _userRepository = userRepository;
         }
         public Task<string> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
-           return _unitofwork.userRepository.Authenticate(request.logininfo);
+           return _userRepository.Authenticate(request.logininfo);
             
         }
     }

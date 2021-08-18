@@ -45,12 +45,13 @@ namespace CakeShop.Infrastructure.Repositories
                     var claims = new Claim[] {
                         new Claim(ClaimTypes.Email,user.Email),
                         new Claim(ClaimTypes.Name,user.FirstName),
+                        new Claim(JwtRegisteredClaimNames.Sub,user.Id.ToString())
+                       
                         //new Claim(ClaimTypes.Role,role.FirstOrDefault())
-                    };
+                    };                   
                     //Generate JSONWebToken
                     var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
                     var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
                     var token = new JwtSecurityToken(_config["Jwt:Issuer"],
                       _config["Jwt:Issuer"],
                       claims,
@@ -79,6 +80,7 @@ namespace CakeShop.Infrastructure.Repositories
         {
             var user = new User()
             {
+                Id = Guid.NewGuid(),
                 FirstName = registerinfo.FirstName,
                 LastName = registerinfo.LastName,
                 Adress = registerinfo.Adress,

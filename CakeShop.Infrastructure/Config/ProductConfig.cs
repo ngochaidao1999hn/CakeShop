@@ -23,6 +23,7 @@ namespace CakeShop.Infrastructure.Config
             builder.Property(pro => pro.Pro_Image)
                 .HasMaxLength(300)
                 .IsRequired();
+            builder.Property(pro => pro.Pro_ImportDate).IsRequired();
             builder.HasOne(x => x.Category).WithMany(x => x.Products).HasForeignKey(x => x.Pro_Category);
         }
     }

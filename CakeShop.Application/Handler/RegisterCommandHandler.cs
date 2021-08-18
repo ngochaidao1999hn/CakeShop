@@ -12,14 +12,14 @@ namespace CakeShop.Application.Handler
 {
     public class RegisterCommandHandler : IRequestHandler<RegisterCommand, bool>
     {
-        private IUnitofWork _unitofwork;
-        public RegisterCommandHandler(IUnitofWork unitofwork)
+        private IUserRepository _userRepository;
+        public RegisterCommandHandler(IUserRepository userRepository)
         {
-            _unitofwork = unitofwork;
+            _userRepository = userRepository;
         }
         public Task<bool> Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
-            return _unitofwork.userRepository.Register(request.registerinfo);
+            return _userRepository.Register(request.registerinfo);
         }
     }
 }
