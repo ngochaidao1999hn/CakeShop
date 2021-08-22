@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CakeShop.Domain.Viewmodels
+namespace CakeShop.Dtos.UserDtos
 {
     public class RegisterInfo
     {

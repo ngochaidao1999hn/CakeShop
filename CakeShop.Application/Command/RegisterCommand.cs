@@ -1,4 +1,4 @@
-﻿using CakeShop.Domain.Viewmodels;
+﻿using CakeShop.Dtos.UserDtos;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,11 +8,6 @@ using System.Threading.Tasks;
 
 namespace CakeShop.Application.Command
 {
-    public class RegisterCommand:IRequest<bool>
-    {
-        public RegisterInfo registerinfo { get; set; }
-        public RegisterCommand(RegisterInfo info) {
-            registerinfo = info;
-        }
-    }
+    public record RegisterCommand(RegisterInfo registerinfo) :IRequest<string>;
+    
 }

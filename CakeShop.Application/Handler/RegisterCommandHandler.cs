@@ -10,16 +10,16 @@ using System.Threading.Tasks;
 
 namespace CakeShop.Application.Handler
 {
-    public class RegisterCommandHandler : IRequestHandler<RegisterCommand, bool>
+    public class RegisterCommandHandler : IRequestHandler<RegisterCommand, string>
     {
-        private IUserRepository _userRepository;
-        public RegisterCommandHandler(IUserRepository userRepository)
+        private IUnitofWork _unitofwork;
+        public RegisterCommandHandler(IUnitofWork unitofWork)
         {
-            _userRepository = userRepository;
+            _unitofwork = unitofWork;
         }
-        public Task<bool> Handle(RegisterCommand request, CancellationToken cancellationToken)
+        public Task<string> Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
-            return _userRepository.Register(request.registerinfo);
+            return _unitofwork.UserRepository.Register(request.registerinfo);
         }
     }
 }

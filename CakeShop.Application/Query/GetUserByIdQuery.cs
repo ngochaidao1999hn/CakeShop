@@ -8,11 +8,6 @@ using System.Threading.Tasks;
 
 namespace CakeShop.Application.Query
 { 
-    public class GetUserByIdQuery:IRequest<User>
-    {
-        public Guid Id { get; set; }
-        public GetUserByIdQuery(Guid id) {
-            Id = id;
-        }
-    }
+    public record GetUserByIdQuery(Guid Id):IRequest<User>;
+    
 }

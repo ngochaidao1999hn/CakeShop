@@ -43,6 +43,7 @@ namespace CakeShop.Api
             services.AddIdentity<User, Role>().AddEntityFrameworkStores<CakeShopDbContext>().AddDefaultTokenProviders();
             services.AddMediatR(typeof(GetAllProductQuery).Assembly);
             services.AddTransient<IUnitofWork, UnitofWork>();
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<IProductRepository, ProductRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<UserManager<User>, UserManager<User>>();

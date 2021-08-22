@@ -16,13 +16,13 @@ namespace CakeShop.Application.Handler
 {
     public class GetAllProductQueryHandler : IRequestHandler<GetAllProductQuery, IEnumerable<Product>>
     {
-        private IProductRepository _productrepository;
-        public GetAllProductQueryHandler(IProductRepository productRepository) {
-            _productrepository = productRepository;
+        private IUnitofWork _unitofwork ;
+        public GetAllProductQueryHandler(IUnitofWork unitofWork) {
+            _unitofwork = unitofWork;
         }
         public  Task<IEnumerable<Product>> Handle(GetAllProductQuery request, CancellationToken cancellationToken)
         {
-            return _productrepository.GetAll();
+            return _unitofwork.ProductRepository.GetAll();
         }
     }
 }

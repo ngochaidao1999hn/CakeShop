@@ -1,6 +1,8 @@
 ﻿using CakeShop.Application.Query;
 using CakeShop.Domain.Entities;
 using CakeShop.Domain.Interfaces;
+using CakeShop.Infrastructure;
+using CakeShop.Infrastructure.EF;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -13,13 +15,13 @@ namespace CakeShop.Application.Handler
 {
     public class GetListProductWithPageNumberQueryHandler : IRequestHandler<GetListProductWithPageNumberQuery, IEnumerable<Product>>
     {
-        private IProductRepository _productrepository;
-        public GetListProductWithPageNumberQueryHandler(IProductRepository productRepository) {
-            _productrepository = productRepository;
+        private IUnitofWork _unitofWork;
+        public GetListProductWithPageNumberQueryHandler(IUnitofWork unitofWork) {
+            _unitofWork = unitofWork;
         }
         public Task<IEnumerable<Product>> Handle(GetListProductWithPageNumberQuery request, CancellationToken cancellationToken)
         {
-            return _productrepository.GetProductWithPage(request.Page);
+            return _unitofWork.ProductRepository.GetProductWithPage(request.Page);
         }
     }
 }

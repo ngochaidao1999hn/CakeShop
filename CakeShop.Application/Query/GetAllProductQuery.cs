@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace CakeShop.Application.Query
 {
-    public class GetAllProductQuery:IRequest<IEnumerable<Product>>
-    {
-    }
+    public record GetAllProductQuery():IRequest<IEnumerable<Product>>;
+    
 }

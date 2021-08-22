@@ -1,6 +1,6 @@
 ﻿using CakeShop.Domain.Entities;
 using CakeShop.Domain.Interfaces;
-using CakeShop.Domain.Viewmodels;
+using CakeShop.Dtos.UserDtos;
 using CakeShop.Infrastructure.EF;
 using CakeShop.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Identity;
@@ -70,13 +70,7 @@ namespace CakeShop.Infrastructure.Repositories
                 return null;
             }
         }
-
-        public async Task<User> GetByGuid(Guid uid)
-        {
-            return await _usermanager.FindByIdAsync(uid.ToString());
-        }
-
-        public async Task<bool> Register(RegisterInfo registerinfo)
+        public async Task<string> Register(RegisterInfo registerinfo)
         {
             var user = new User()
             {
@@ -92,11 +86,11 @@ namespace CakeShop.Infrastructure.Repositories
             var result = await _usermanager.CreateAsync(user, registerinfo.Password);
             if (result.Succeeded)
             {
-                return true;
+                return "Success";
             }
             else
             {
-                return false;
+                return "False";
             }
         }
     }

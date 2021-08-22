@@ -1,5 +1,5 @@
 ﻿using CakeShop.Domain.Entities;
-using CakeShop.Domain.Viewmodels;
+using CakeShop.Dtos.UserDtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +11,6 @@ namespace CakeShop.Domain.Interfaces
     public interface IUserRepository:IRepository<User>
     {
         Task<string> Authenticate(LoginInfo logininfo);
-        Task<bool> Register(RegisterInfo registerinfo);
-        Task<User> GetByGuid(Guid uid);
+        Task<string> Register(RegisterInfo registerinfo);    
     }
 }

@@ -1,4 +1,20 @@
-﻿<!DOCTYPE html>
+﻿@using Newtonsoft.Json
+@{
+    int count = 0;
+
+    if (Context.Request.Cookies["cart"] != null)
+    {
+        List<CartViewModel> list = JsonConvert.DeserializeObject<List<CartViewModel>>(Context.Request.Cookies["cart"]);
+        foreach (var item in list) {
+            count += item.Quantity;
+        }
+    }
+    else
+    {
+        count = 0;
+    }
+}
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -56,7 +72,16 @@
                         <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
                     </ul>
                     <ul class="h_search list_style">
-                        <li class="shop_cart"><a href="#"><i class="lnr lnr-cart"></i></a></li>
+                        <li class="shop_cart">
+                            <a asp-controller="Orders" asp-action="Cart">
+                                <i class="fa fa-shopping-cart"></i>
+                                @if (count > 0)
+                                {
+                                    <span class='badge badge-warning' id='lblCartCount' disabled="true"> @count </span>
+                                }
+
+                            </a>
+                        </li>
                         <li><a class="popup-with-zoom-anim" href="#test-search"><i class="fa fa-search"></i></a></li>
                     </ul>
                 </div>
@@ -65,7 +90,7 @@
         <div class="main_menu_two">
             <div class="container">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <a class="navbar-brand" href="index.html"><img src="~/img/logo-2.png" alt=""></a>
+                    <a class="navbar-brand" asp-controller="Home" asp-action="Index"><img src="~/img/logo-2.png" alt=""></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="my_toggle_menu">
                             <span></span>
@@ -76,14 +101,7 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav justify-content-end">
                             <li class="dropdown submenu active">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Home</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="index.html">Home 1</a></li>
-                                    <li><a href="index-2.html">Home 2</a></li>
-                                    <li><a href="index-3.html">Home 3</a></li>
-                                    <li><a href="index-4.html">Home 4</a></li>
-                                    <li><a href="index-5.html">Home 5</a></li>
-                                </ul>
+                                <a class="dropdown-toggle" data-toggle="dropdown" asp-controller="Home" asp-action="Index" role="button" aria-haspopup="true" aria-expanded="false">Home</a>
                             </li>
                             <li><a href="cake.html">Our Cakes</a></li>
                             <li><a asp-controller="Home" asp-action="Menu">Menu</a></li>
@@ -258,6 +276,7 @@
     <script src="~/vendors/lightbox/simpleLightbox.min.js"></script>
 
     <script src="~/js/theme.js"></script>
+    <script src="~/js/site.js"></script>
 </body>
 
 </html>

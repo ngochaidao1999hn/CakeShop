@@ -1,4 +1,4 @@
-﻿using CakeShop.Domain.Viewmodels;
+﻿using CakeShop.Dtos.UserDtos;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,11 +8,6 @@ using System.Threading.Tasks;
 
 namespace CakeShop.Application.Command
 {
-    public class LoginCommand:IRequest<string>
-    {
-       public LoginInfo logininfo { get; set; }
-        public LoginCommand(LoginInfo info) {
-            logininfo = info;
-        }
-    }
+    public record LoginCommand(LoginInfo logininfo) :IRequest<string>;
+    
 }

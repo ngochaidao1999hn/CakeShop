@@ -1,6 +1,6 @@
 ﻿using CakeShop.Application.Command;
 using CakeShop.Application.Query;
-using CakeShop.Domain.Viewmodels;
+using CakeShop.Dtos.UserDtos;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -32,10 +32,24 @@ namespace CakeShop.Api.Controllers
         }
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromForm] RegisterInfo registerinfo) {
+        
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
-            return Ok(await _mediator.Send(new RegisterCommand(registerinfo)));
+             if (registerinfo.Password != registerinfo.ConfirmPassword) {
+                return BadRequest("Password and Confirm Password not match");
+            }
+            LoginInfo User = new LoginInfo()
+            {
+                UserName = registerinfo.UserName,
+                Password = registerinfo.Password,
+                RememberMe = true
+            };
+            if (await _mediator.Send(new LoginCommand(User)) == null)
+            {
+                return Ok(await _mediator.Send(new RegisterCommand(registerinfo)));
+            }
+            return BadRequest("User already exist");
         }
         [HttpGet("GetById")]
         public async Task<IActionResult> GetById(Guid Id) {

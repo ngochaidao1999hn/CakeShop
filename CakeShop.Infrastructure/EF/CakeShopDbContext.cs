@@ -16,6 +16,7 @@ namespace CakeShop.Infrastructure.EF
         public CakeShopDbContext(DbContextOptions option) : base(option) { 
         
         }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new ProductConfig());

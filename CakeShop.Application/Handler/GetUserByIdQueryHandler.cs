@@ -13,13 +13,13 @@ namespace CakeShop.Application.Handler
 {
     public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, User>
     {
-        private IUserRepository _userRepository;
-        public GetUserByIdQueryHandler(IUserRepository userRepository) {
-            _userRepository = userRepository;
+        private IUnitofWork _unitofwork;
+        public GetUserByIdQueryHandler(IUnitofWork unitofWork) {
+            _unitofwork = unitofWork;
         }
         public Task<User> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
         {
-            return _userRepository.GetByGuid(request.Id);
+            return _unitofwork.UserRepository.GetById(request.Id);
         }
     }
 }

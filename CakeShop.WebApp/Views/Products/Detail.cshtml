@@ -28,9 +28,9 @@
                     <h5>Price :<span>@Model.Product.Pro_Price.ToString("C0", new CultureInfo("vi-VN"))</span></h5>
                     <div class="quantity_box">
                         <label for="quantity">Quantity :</label>
-                        <input type="text" placeholder="1" id="quantity">
-                    </div>
-                    <button class="pink_more">Add to Cart</button>
+                        <input type="text" placeholder="1" value="1" id="Detail_Quantity" >
+                    </div>                  
+                    <button class="pink_more" id="btn_AddToCart" data-id="@Model.Product.Pro_Id">Add to Cart</button>
                 </div>
             </div>
         </div>

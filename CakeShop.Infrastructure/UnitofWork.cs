@@ -16,9 +16,17 @@ namespace CakeShop.Infrastructure
     {
         private bool disposedValue;
         private CakeShopDbContext _context;
-        public UnitofWork(CakeShopDbContext context) {
-            _context = context;          
-        }
+        public IProductRepository ProductRepository { get; }
+
+        public ICategoryRepository CategoryRepository { get; }
+        public IUserRepository UserRepository { get; }
+        public UnitofWork(CakeShopDbContext context,IProductRepository productRepository,ICategoryRepository categoryRepository,IUserRepository userRepository) {
+            _context = context;
+            ProductRepository = productRepository;
+            CategoryRepository = categoryRepository;
+            UserRepository = userRepository;
+        } 
+       
 
         public async Task Commit()
         {
