@@ -1,6 +1,7 @@
 ﻿using CakeShop.Application.Query;
 using CakeShop.Domain.Entities;
 using CakeShop.Domain.Interfaces;
+using CakeShop.Dtos.ProductDto;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -31,7 +32,7 @@ namespace CakeShop.Api.Controllers
         }
         [HttpGet("GetById")]
         public async Task<IActionResult> GetProductById(int id) {
-            return Ok(await _mediator.Send(new GetProductByIdQuery(id)));
+            return Ok( await _mediator.Send(new GetProductByIdQuery(id)));
         }
         [HttpGet("GetByCategory")]
         public async Task<IActionResult> GetProductByCategory(int Cate_id)

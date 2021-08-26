@@ -1,4 +1,5 @@
 ﻿using CakeShop.Domain.Entities;
+using CakeShop.Dtos.ProductDto;
 using CakeShop.WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -16,16 +17,25 @@ namespace CakeShop.WebApp.Controllers
             return View();
         }
         public async Task<IActionResult> Detail(int id) {
-            ProductDetailViewModel productDetailViewModel = new ProductDetailViewModel();
-            using (var httpclient = new HttpClient()) {
-                var ProductbyIdResponse = await httpclient.GetAsync("https://localhost:5001/api/Product/GetById?id=" + id);
-                var ProductbyIdResult = await ProductbyIdResponse.Content.ReadAsStringAsync();
-                productDetailViewModel.Product = Newtonsoft.Json.JsonConvert.DeserializeObject<Product>(ProductbyIdResult);
-                var SimilarProductResponse = await httpclient.GetAsync("https://localhost:5001/api/Product/GetByCategory?Cate_id=" + productDetailViewModel.Product.Pro_Category);
-                var SimilarProductResult = await SimilarProductResponse.Content.ReadAsStringAsync();
-                productDetailViewModel.Similar_Product = Newtonsoft.Json.JsonConvert.DeserializeObject<IEnumerable<Product>>(SimilarProductResult);
-            }
-                return View(productDetailViewModel);
+            var productDetail = new ProductDetailPageDto();
+            var httpclient = new HttpClient();
+                var Response = await httpclient.GetAsync("https://localhost:5001/api/Product/GetById?id=" + id);
+                var Result = await Response.Content.ReadAsStringAsync();
+                productDetail =  Newtonsoft.Json.JsonConvert.DeserializeObject<ProductDetailPageDto>(Result);    
+                return View(productDetail);
         }
+        [HttpGet]
+        public async Task<IActionResult> Search(string keyword)
+        {
+            IEnumerable<Product> ProductList;
+            using (var httpclient = new HttpClient())
+            {
+                var response = await httpclient.GetAsync("https://localhost:5001/api/Product");
+                var result = await response.Content.ReadAsStringAsync();
+                ProductList = Newtonsoft.Json.JsonConvert.DeserializeObject<IEnumerable<Product>>(result);
+            }
+            var product_searched = ProductList.Where(p => p.Pro_Name.Contains(keyword));
+            return View(product_searched);
+       }
     }
 }

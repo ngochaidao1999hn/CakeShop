@@ -1,4 +1,5 @@
 ﻿using CakeShop.Domain.Entities;
+using CakeShop.Dtos.ProductDto;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CakeShop.Application.Query
 {
-    public class GetProductByIdQuery:IRequest<Product>
+    public class GetProductByIdQuery:IRequest<ProductDetailPageDto>
     {
         public int Id { get; set; }
         public GetProductByIdQuery(int id) {

@@ -28,7 +28,7 @@ namespace CakeShop.WebApp.Controllers
                 var response = await httpclient.GetAsync("https://localhost:5001/api/product");
                 var result = await response.Content.ReadAsStringAsync();
                 ListProduct = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Product>>(result);
-            }
+            }          
             return View(ListProduct);
         }
         public async Task<IActionResult> Menu() {

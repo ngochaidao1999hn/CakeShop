@@ -91,7 +91,7 @@
                         <h4>Total <span>@price.ToString("C0", new CultureInfo("vi-VN"))</span></h4>
                     </div>
                     <div class="cart_footer">
-                        <a class="pest_btn" href="#">Proceed to Checkout</a>
+                        <a class="pest_btn" asp-controller="Orders" asp-action="Checkout">Proceed to Checkout</a>
                     </div>
                 </div>
             </div>

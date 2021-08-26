@@ -1,5 +1,7 @@
 ﻿using CakeShop.Domain.Entities;
+using CakeShop.Dtos.ProductDto;
 using CakeShop.WebApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -14,11 +16,11 @@ namespace CakeShop.WebApp.Controllers
     public class OrdersController : Controller
     {
         private JsonSerializerSettings settings = new JsonSerializerSettings();
-        private CookieOptions options = new CookieOptions();
+        private CookieOptions options = new CookieOptions();       
         public OrdersController() {
             // This tells your serializer that multiple references are okay.
             settings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-            options.Expires = DateTime.Now.AddDays(2);
+            options.Expires = DateTime.Now.AddHours(1);
         }
         public IActionResult Cart()
         {
@@ -30,10 +32,16 @@ namespace CakeShop.WebApp.Controllers
             return RedirectToAction("Index","Home");
 
         }
+        [Authorize]
         [HttpGet]
         public IActionResult Checkout()
         {
-            return View();
+            if (Request.Cookies["cart"] != null)
+            {
+                var cart = JsonConvert.DeserializeObject<List<CartViewModel>>(Request.Cookies["cart"]);
+                return View(cart);
+            }
+            return RedirectToAction("Index", "Home");
         }
         public void AddProductToCart(int Pro_id, int Quantity)
         {
@@ -63,16 +71,16 @@ namespace CakeShop.WebApp.Controllers
                 Response.Cookies.Append("cart",JsonConvert.SerializeObject(cart, settings), options);
             }
         }
-        public async Task<Product> GetProductById(int Id)
+        public async Task<ProductDto> GetProductById(int Id)
         {
-            Product p = null;
+            ProductDetailPageDto p = null;
             using (var httpclient = new HttpClient())
             {
                 var ProductbyIdResponse = await httpclient.GetAsync("https://localhost:5001/api/Product/GetById?id=" + Id);
                 var ProductbyIdResult = await ProductbyIdResponse.Content.ReadAsStringAsync();
-                p = JsonConvert.DeserializeObject<Product>(ProductbyIdResult);
+                p = JsonConvert.DeserializeObject<ProductDetailPageDto>(ProductbyIdResult);
             }
-            return p;
+            return p.product;
         }
     }
 }

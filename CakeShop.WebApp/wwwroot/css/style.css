@@ -122,17 +122,45 @@ i:before {
 /* Main Tittle css
 ============================================================================================ */
 .main_title {
-  padding-bottom: 50px;
+  padding-bottom: 10px;
 }
+.item {
+    white-space: nowrap;
+    display: inline
+}
+.or {
+    background: #f195b2;
+    border-radius: 40px;
+    color: #FFFFFF;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    height: 50px;
+    line-height: 50px;
+    margin-top: 110px;
+    margin-bottom:110px;
+    text-align: center;
+    width: 50px;
+}
+label {
+    display: inline-block;
+}
+#Remember {
+    width: 15px;
+   margin-left:20px;
+}
+#remember_label {
+ margin-top:10px;
+ margin-left:5px;
 
+}
 .main_title h2 {
-  color: #3e606b;
-  font-family: "Playfair Display", serif;
-  font-weight: bold;
-  font-size: 38px;
-  position: relative;
-  display: inline-block;
-  margin-bottom: 15px;
+    color: #3e606b;
+    font-family: "Playfair Display", serif;
+    font-weight: bold;
+    font-size: 38px;
+    position: relative;
+    display: inline-block;
+    margin-bottom: 15px;
 }
 
 .main_title h2:before {
@@ -2466,16 +2494,16 @@ i:before {
   font-weight: bold;
 }
 
-.faq_form_area .faq_left_form .contact_us_form .form-group input {
-  border: none;
-  border-bottom: 2px solid #e3e3e3;
-  background: transparent;
-  padding: 0px;
-  border-radius: 0px;
-  font-size: 18px;
-  font-family: "Playfair Display", serif;
-  color: rgba(0, 0, 0, 0.7);
-}
+    .faq_form_area .faq_left_form .contact_us_form .form-group input[type="text"] input[type="email"] input[type="password"] input[type="date"] {
+        border: none;
+        border-bottom: 2px solid #e3e3e3;
+        background: transparent;
+        padding: 0px;
+        border-radius: 0px;
+        font-size: 18px;
+        font-family: "Playfair Display", serif;
+        color: rgba(0, 0, 0, 0.7);
+    }
 
 .faq_form_area .faq_left_form .contact_us_form .form-group input.placeholder {
   font-size: 18px;
@@ -4588,6 +4616,13 @@ i:before {
   max-width: 950px;
   margin: auto;
 }
+.profile_area {
+    position: relative;
+    max-width: 300px;
+    margin: auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
 
 .search_area .search_box_inner {
   background: #1a1a1c;
@@ -6502,6 +6537,41 @@ i:before {
   opacity: 0;
 }
 
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
+}
+
+.title {
+    color: grey;
+    font-size: 18px;
+}
+
+#profile_button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+}
+
+a {
+    text-decoration: none;
+    font-size: 22px;
+    color: black;
+}
+
+    button:hover, a:hover {
+        opacity: 0.7;
+    }
 /*---------------------------------------------------- */
 /*----------------------------------------------------*/
 /* Footer Area css

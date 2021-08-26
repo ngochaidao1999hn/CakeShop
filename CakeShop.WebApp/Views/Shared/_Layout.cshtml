@@ -1,11 +1,15 @@
 ﻿@using Newtonsoft.Json
+@using System.Security.Claims;
+@using CakeShop.Dtos.HomeDto;
+@using System.Globalization;
 @{
     int count = 0;
-
+  
     if (Context.Request.Cookies["cart"] != null)
     {
         List<CartViewModel> list = JsonConvert.DeserializeObject<List<CartViewModel>>(Context.Request.Cookies["cart"]);
-        foreach (var item in list) {
+        foreach (var item in list)
+        {
             count += item.Quantity;
         }
     }
@@ -13,6 +17,23 @@
     {
         count = 0;
     }
+    UserInfoDto user = new UserInfoDto();
+    if (User.Identity.Name != null)
+    {
+
+        user.First_Name = User.Identity.Name;
+        user.Last_Name = User.FindFirst(ClaimTypes.Surname).Value;
+        user.Adress = User.FindFirst(ClaimTypes.StreetAddress).Value;
+        user.Dob = DateTime.Parse(User.FindFirst(ClaimTypes.DateOfBirth).Value,new CultureInfo("vi-VN"));
+        user.Email = User.FindFirst(ClaimTypes.Email).Value;
+        user.Phone = User.FindFirst(ClaimTypes.MobilePhone).Value;
+
+    }
+    else
+    {
+        user = null;
+    }
+
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -44,8 +65,8 @@
     <link href="~/vendors/magnifc-popup/magnific-popup.css" rel="stylesheet">
     <link href="~/vendors/nice-select/css/nice-select.css" rel="stylesheet">
 
-    <link href="~/css/style.css" rel="stylesheet">
-    <link href="~/css/responsive.css" rel="stylesheet">
+    <link href="~/css/style.css" rel="stylesheet" asp-append-version="true">
+    <link href="~/css/responsive.css" rel="stylesheet" asp-append-version="true">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -83,6 +104,16 @@
                             </a>
                         </li>
                         <li><a class="popup-with-zoom-anim" href="#test-search"><i class="fa fa-search"></i></a></li>
+                        @if (user == null)
+                        {
+                            <li><a asp-controller="User" asp-action="Login"><i class="fa fa-lock"></i> Login</a></li>
+                        }
+                        else
+                        {
+                            <li><a class="popup-with-zoom-anim" href="#profile_area"> Hello @user.First_Name</a></li>
+
+
+                        }
                     </ul>
                 </div>
             </div>
@@ -226,33 +257,42 @@
                 </div>
             </div>
         </div>
-        <div class="footer_copyright">
-            <div class="container">
-                <div class="copyright_inner">
-                    <div class="float-left">
-                        <h5><a target="_blank" href="https://www.templatespoint.net">Templates Point</a></h5>
-                    </div>
-                    <div class="float-right">
-                        <a href="#">Purchase Now</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+       
     </footer>
     <!--================End Footer Area =================-->
     <!--================Search Box Area =================-->
     <div class="search_area zoom-anim-dialog mfp-hide" id="test-search">
-        <div class="search_box_inner">
-            <h3>Search</h3>
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search for...">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button"><i class="icon icon-Search"></i></button>
-                </span>
+        <form asp-controller="Products" asp-action="Search" method="Get">
+            <div class="search_box_inner">
+                <h3>Search</h3>
+                <div class="input-group">
+                    <input type="text" class="form-control" name="keyword" placeholder="Search for...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button"><i class="icon icon-Search"></i></button>
+                    </span>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
     <!--================End Search Box Area =================-->
+    <!--================Profile Area =================-->
+    @if (user != null)
+    {
+        <div class="profile_area zoom-anim-dialog mfp-hide" id="profile_area" style="background-color:aliceblue;">
+            <img src="img.jpg" alt="John" style="width:100%">
+            <h1>@user.First_Name @user.Last_Name </h1>
+            <p class="title">@user.Email</p>
+            <p>@user.Adress</p>
+            <p>@user.Dob.ToString("dd/MM/yyyy")</p>
+            <p><a href="#">Edit Profile</a></p>
+            <p><button id="profile_button"><a asp-controller="User" asp-action="Logout" style="color:white;">Logout</a></button></p>
+        </div>
+    }
+    else
+    {
+        <p>Nothing</p>
+    }
+    <!--================End Profile Area =================-->
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="~/js/jquery-3.2.1.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

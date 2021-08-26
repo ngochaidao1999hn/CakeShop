@@ -1,4 +1,5 @@
 ﻿using CakeShop.Domain.Entities;
+using CakeShop.Dtos.ProductDto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,6 @@ namespace CakeShop.Domain.Interfaces
     {
         Task<IEnumerable<Product>> GetProductWithPage(int Page);
         Task<IEnumerable<Product>> GetProductListWithCategory(int Cate_id);
+        Task<ProductDetailPageDto> GetProductDetailwithSimilarProduct(int Pro_id);
     }
 }

@@ -20,7 +20,7 @@ namespace CakeShop.Api.Controllers
             _mediator = mediator;
         }
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromForm]LoginInfo logininfo) {
+        public async Task<IActionResult> Login([FromBody]LoginInfo logininfo) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
@@ -28,10 +28,10 @@ namespace CakeShop.Api.Controllers
             if (token == null) {
                 return BadRequest("User Name or Password not correct !!");
              }
-            return Ok(new {Token= token });
+            return Ok(token);
         }
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromForm] RegisterInfo registerinfo) {
+        public async Task<IActionResult> Register([FromBody] RegisterInfo registerinfo) {
         
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);

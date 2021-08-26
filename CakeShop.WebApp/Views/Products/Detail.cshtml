@@ -1,4 +1,4 @@
-﻿@model CakeShop.WebApp.Models.ProductDetailViewModel;
+﻿@model CakeShop.Dtos.ProductDto.ProductDetailPageDto;
 @using System.Globalization;
 @{
     ViewData["Title"] = "Detail";
@@ -23,14 +23,14 @@
             </div>
             <div class="col-lg-6">
                 <div class="product_details_text">
-                    <h4>@Model.Product.Pro_Name</h4>
-                    <p>@Model.Product.Pro_Description</p>
-                    <h5>Price :<span>@Model.Product.Pro_Price.ToString("C0", new CultureInfo("vi-VN"))</span></h5>
+                    <h4>@Model.product.Pro_Name</h4>
+                    <p>@Model.product.Pro_Description</p>
+                    <h5>Price :<span>@Model.product.Pro_Price.ToString("C0", new CultureInfo("vi-VN"))</span></h5>
                     <div class="quantity_box">
                         <label for="quantity">Quantity :</label>
                         <input type="text" placeholder="1" value="1" id="Detail_Quantity" >
                     </div>                  
-                    <button class="pink_more" id="btn_AddToCart" data-id="@Model.Product.Pro_Id">Add to Cart</button>
+                    <button class="pink_more" id="btn_AddToCart" data-id="@Model.product.Pro_Id">Add to Cart</button>
                 </div>
             </div>
         </div>
@@ -44,7 +44,7 @@
             </nav>
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                    <p>@Model.Product.Pro_Description</p>
+                    <p>@Model.product.Pro_Description</p>
                 </div>
                 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
 
@@ -64,7 +64,7 @@
             <h2>Similar Products</h2>
         </div>
         <div class="row similar_product_inner">
-            @foreach (var item in Model.Similar_Product.Take(4))
+            @foreach (var item in Model.ProductSimilar.Take(4))
             {
                 <div class="col-lg-3 col-md-4 col-6">
                     <div class="cake_feature_item">

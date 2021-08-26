@@ -45,6 +45,10 @@ namespace CakeShop.Infrastructure.Repositories
                     var claims = new Claim[] {
                         new Claim(ClaimTypes.Email,user.Email),
                         new Claim(ClaimTypes.Name,user.FirstName),
+                        new Claim(ClaimTypes.Surname,user.LastName),
+                        new Claim(ClaimTypes.DateOfBirth,user.Dob.ToString()),
+                        new Claim(ClaimTypes.MobilePhone,user.PhoneNumber),
+                        new Claim(ClaimTypes.StreetAddress,user.Adress),
                         new Claim(JwtRegisteredClaimNames.Sub,user.Id.ToString())
                        
                         //new Claim(ClaimTypes.Role,role.FirstOrDefault())
