@@ -1,8 +1,9 @@
-﻿@model CakeShop.Dtos.ProductDto.ProductDetailPageDto;
+﻿@model CakeShop.Domain.Entities.Product;
 @using System.Globalization;
 @{
     ViewData["Title"] = "Detail";
 }
+
 <section class="banner_area">
     <div class="container">
         <div class="banner_text">
@@ -23,14 +24,14 @@
             </div>
             <div class="col-lg-6">
                 <div class="product_details_text">
-                    <h4>@Model.product.Pro_Name</h4>
-                    <p>@Model.product.Pro_Description</p>
-                    <h5>Price :<span>@Model.product.Pro_Price.ToString("C0", new CultureInfo("vi-VN"))</span></h5>
+                    <h4>@Model.Pro_Name</h4>
+                    <p>@Model.Pro_Description</p>
+                    <h5>Price :<span>@Model.Pro_Price.ToString("C0", new CultureInfo("vi-VN"))</span></h5>
                     <div class="quantity_box">
                         <label for="quantity">Quantity :</label>
                         <input type="text" placeholder="1" value="1" id="Detail_Quantity" >
                     </div>                  
-                    <button class="pink_more" id="btn_AddToCart" data-id="@Model.product.Pro_Id">Add to Cart</button>
+                    <button class="pink_more" id="btn_AddToCart" data-id="@Model.Pro_Id">Add to Cart</button>
                 </div>
             </div>
         </div>
@@ -44,7 +45,7 @@
             </nav>
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                    <p>@Model.product.Pro_Description</p>
+                    <p>@Model.Pro_Description</p>
                 </div>
                 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
 
@@ -57,29 +58,24 @@
         </div>
     </div>
 </section>
-<!--================Similar Product Area =================-->
-<section class="similar_product_area p_100">
-    <div class="container">
-        <div class="main_title">
-            <h2>Similar Products</h2>
-        </div>
-        <div class="row similar_product_inner">
-            @foreach (var item in Model.ProductSimilar.Take(4))
-            {
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="cake_feature_item">
-                        <div class="cake_img">
-                            <img src="~/img/cake-feature/c-feature-1.jpg" alt="">
-                        </div>
-                        <div class="cake_text">
-                            <h4>@item.Pro_Price.ToString("C0",new CultureInfo("vi-VN"))</h4>
-                            <h3>@item.Pro_Name</h3>
-                            <a class="pest_btn" asp-controller="Products" asp-action="Detail" asp-route-id="@item.Pro_Id">Add to cart</a>
-                        </div>
-                    </div>
-                </div>
-            }            
-        </div>
-    </div>
-</section>
-<!--================End Similar Product Area =================-->
+<script src="~/js/jquery-3.2.1.min.js"></script>
+<script>
+    $("#btn_AddToCart").on('click', function (e) {
+        var Pro_id = $(this).data("id");
+        var quantity = $('#Detail_Quantity').val();
+        console.log(quantity)
+        e.preventDefault();
+        $.get('/Orders/AddProductToCart?Pro_id=' + Pro_id + '&Quantity=' + quantity, function (data) {
+
+            if ($("#lblCartCount").val() != null) {
+                $("#lblCartCount").text(parseInt($("#lblCartCount").text()) + parseInt(quantity));
+
+            } else {
+                $("#cart_count").append('<span class=\'badge badge-warning\' id=\'lblCartCount\' disabled=\"true\">' + parseInt(quantity) + ' <\/span >');
+            }
+
+        });
+    });
+
+</script>
+

@@ -9,7 +9,7 @@
         List<CartViewModel> list = JsonConvert.DeserializeObject<List<CartViewModel>>(Context.Request.Cookies["cart"]);
         foreach (var item in list)
         {
-            price += item.Quantity*item.product.Pro_Price;
+            price += item.Quantity * item.product.Pro_Price;
         }
     }
     else
@@ -46,7 +46,7 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        <tr>
+                        <tr id="tr-@Model.IndexOf(item)">
                             <td>
                                 <img src="~/img/product/cart-img.jpg" alt="">
                             </td>
@@ -56,7 +56,7 @@
                                 <input type="text" value="@item.Quantity" id="quantity" />
                             </td>
                             <td>@(item.product.Pro_Price*item.Quantity)</td>
-                            <td>X</td>
+                            <td><button class="remove_item" data-index="@Model.IndexOf(item)" data-quantity="@item.Quantity">X</button></td>
                         </tr>
                     }
 
@@ -85,7 +85,7 @@
                         Cart Total
                     </div>
                     <div class="sub_total">
-                        <h5>Sub Total <span>@price.ToString("C0",new CultureInfo("vi-VN"))</span></h5>
+                        <h5>Sub Total <span>@price.ToString("C0", new CultureInfo("vi-VN"))</span></h5>
                     </div>
                     <div class="total">
                         <h4>Total <span>@price.ToString("C0", new CultureInfo("vi-VN"))</span></h4>
@@ -99,3 +99,25 @@
     </div>
 </section>
 <!--================End Cart Table Area =================-->
+<script src="~/js/jquery-3.2.1.min.js"></script>
+<script>
+    $(".remove_item").on('click', function (e) {
+        var index = $(this).data("index");
+        var quantity = $(this).data("quantity");
+        console.log(index);
+        e.preventDefault();
+        $.get('/Orders/RemoveFromCart?index=' + index, function (data) {
+
+            var count = parseInt($("#lblCartCount").text()) - parseInt(quantity);
+            $("#lblCartCount").text(count);
+            if (count == 0) {
+                window.location.href = '@Url.Action("Index","Home")';
+            }
+            $("#tr-" + index).remove();
+           
+
+        });
+    });
+
+</script>
+

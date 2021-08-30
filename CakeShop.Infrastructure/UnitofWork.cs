@@ -16,18 +16,17 @@ namespace CakeShop.Infrastructure
     {
         private bool disposedValue;
         private CakeShopDbContext _context;
-        public IProductRepository ProductRepository { get; }
-
-        public ICategoryRepository CategoryRepository { get; }
-        public IUserRepository UserRepository { get; }
-        public UnitofWork(CakeShopDbContext context,IProductRepository productRepository,ICategoryRepository categoryRepository,IUserRepository userRepository) {
+        public IProductRepository ProductRepository { get; private set; }
+        public IOrderDetailRepository OrderDetailRepository { get; private set; }
+        public ICategoryRepository CategoryRepository { get; private set; }
+        public IOrderRepository OrderRepository { get; private set; }
+        public UnitofWork(CakeShopDbContext context) {
             _context = context;
-            ProductRepository = productRepository;
-            CategoryRepository = categoryRepository;
-            UserRepository = userRepository;
+            ProductRepository = new ProductRepository(_context);
+            CategoryRepository = new CategoryRepository(_context);         
+            OrderRepository = new OrderRepository(_context);
+            OrderDetailRepository = new OrderDetailRepository(_context);
         } 
-       
-
         public async Task Commit()
         {
             await _context.SaveChangesAsync();

@@ -1,5 +1,5 @@
-﻿using CakeShop.Application.Command;
-using CakeShop.Application.Query;
+﻿
+using CakeShop.Domain.Interfaces;
 using CakeShop.Dtos.UserDtos;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -15,16 +15,16 @@ namespace CakeShop.Api.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private IMediator _mediator;
-        public UserController(IMediator mediator) {
-            _mediator = mediator;
+        private IUserRepository _user;
+        public UserController(IUserRepository user) {
+            _user = user;
         }
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody]LoginInfo logininfo) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
-            var token = await _mediator.Send(new LoginCommand(logininfo));
+            var token = await _user.Authenticate(logininfo);
             if (token == null) {
                 return BadRequest("User Name or Password not correct !!");
              }
@@ -45,16 +45,13 @@ namespace CakeShop.Api.Controllers
                 Password = registerinfo.Password,
                 RememberMe = true
             };
-            if (await _mediator.Send(new LoginCommand(User)) == null)
+            if (await _user.Authenticate(User) == null)
             {
-                return Ok(await _mediator.Send(new RegisterCommand(registerinfo)));
+                return Ok(await _user.Register(registerinfo));
             }
             return BadRequest("User already exist");
         }
-        [HttpGet("GetById")]
-        public async Task<IActionResult> GetById(Guid Id) {
-            return Ok(await _mediator.Send(new GetUserByIdQuery(Id)));
-        }
+
 
     }
 }

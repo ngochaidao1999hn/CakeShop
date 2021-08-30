@@ -49,7 +49,7 @@ namespace CakeShop.Infrastructure.Repositories
                         new Claim(ClaimTypes.DateOfBirth,user.Dob.ToString()),
                         new Claim(ClaimTypes.MobilePhone,user.PhoneNumber),
                         new Claim(ClaimTypes.StreetAddress,user.Adress),
-                        new Claim(JwtRegisteredClaimNames.Sub,user.Id.ToString())
+                        new Claim(ClaimTypes.NameIdentifier,user.Id.ToString())
                        
                         //new Claim(ClaimTypes.Role,role.FirstOrDefault())
                     };                   

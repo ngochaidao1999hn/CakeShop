@@ -10,7 +10,9 @@ namespace CakeShop.Domain.Interfaces
     {
         IProductRepository ProductRepository { get; }
         ICategoryRepository CategoryRepository { get; }
-        IUserRepository UserRepository { get; }
+        //IUserRepository UserRepository { get; }
+        IOrderRepository OrderRepository { get; }
+        IOrderDetailRepository OrderDetailRepository { get; }
         Task Commit();
     }
 }

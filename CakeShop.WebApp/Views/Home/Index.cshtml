@@ -3,8 +3,13 @@
 @using System.Globalization;
 @{
     ViewData["Title"] = "Home Page";
-}
 
+}
+@if (ViewBag.success != null) { 
+    <div class="alert alert-success" id="success_notice">
+        Order Success!!
+    </div>
+}
 <!--================Slider Area =================-->
 <section class="main_slider_area">
     <div id="main_slider5" class="rev_slider" data-version="5.3.1.6">

@@ -7,13 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CakeShop.Domain", "CakeShop
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CakeShop.Infrastructure", "CakeShop.Infrastructure\CakeShop.Infrastructure.csproj", "{13EEA4CE-0730-4757-B632-0001DFD6E87C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CakeShop.Application", "CakeShop.Application\CakeShop.Application.csproj", "{1A5A4630-265A-4509-9C36-73D27E786C7C}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CakeShop.Api", "CakeShop.Api\CakeShop.Api.csproj", "{271476B2-C2A6-406D-8CB3-EACAE850AE47}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CakeShop.WebApp", "CakeShop.WebApp\CakeShop.WebApp.csproj", "{1A504B3C-DC7D-4038-8636-7CC8E2BF3999}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CakeShop.Dtos", "CakeShop.Dtos\CakeShop.Dtos.csproj", "{35F3BCFD-9C5A-4224-B9C7-F93E7D55FD94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CakeShop.Dtos", "CakeShop.Dtos\CakeShop.Dtos.csproj", "{35F3BCFD-9C5A-4224-B9C7-F93E7D55FD94}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +27,6 @@ Global
 		{13EEA4CE-0730-4757-B632-0001DFD6E87C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13EEA4CE-0730-4757-B632-0001DFD6E87C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13EEA4CE-0730-4757-B632-0001DFD6E87C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1A5A4630-265A-4509-9C36-73D27E786C7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1A5A4630-265A-4509-9C36-73D27E786C7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1A5A4630-265A-4509-9C36-73D27E786C7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1A5A4630-265A-4509-9C36-73D27E786C7C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{271476B2-C2A6-406D-8CB3-EACAE850AE47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{271476B2-C2A6-406D-8CB3-EACAE850AE47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{271476B2-C2A6-406D-8CB3-EACAE850AE47}.Release|Any CPU.ActiveCfg = Release|Any CPU

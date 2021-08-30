@@ -17,6 +17,10 @@ namespace CakeShop.Infrastructure.EF
         
         }
 
+        public CakeShopDbContext()
+        {
+        }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new ProductConfig());

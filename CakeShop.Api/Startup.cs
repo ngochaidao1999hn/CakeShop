@@ -1,10 +1,8 @@
-using CakeShop.Application.Query;
 using CakeShop.Domain.Entities;
 using CakeShop.Domain.Interfaces;
 using CakeShop.Infrastructure;
 using CakeShop.Infrastructure.EF;
 using CakeShop.Infrastructure.Repositories;
-using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -41,9 +39,10 @@ namespace CakeShop.Api
 
             services.AddDbContext<CakeShopDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("CakeShopConnectionString")));
             services.AddIdentity<User, Role>().AddEntityFrameworkStores<CakeShopDbContext>().AddDefaultTokenProviders();
-            services.AddMediatR(typeof(GetAllProductQuery).Assembly);
             services.AddTransient<IUnitofWork, UnitofWork>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
+            services.AddTransient<IOrderRepository, OrderRepository>();
+            services.AddTransient<IOrderDetailRepository, OrderDetailRepository>();
             services.AddTransient<IProductRepository, ProductRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<UserManager<User>, UserManager<User>>();

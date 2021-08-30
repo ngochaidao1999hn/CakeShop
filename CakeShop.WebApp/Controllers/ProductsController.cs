@@ -16,13 +16,23 @@ namespace CakeShop.WebApp.Controllers
         {
             return View();
         }
+        [HttpGet]
         public async Task<IActionResult> Detail(int id) {
-            var productDetail = new ProductDetailPageDto();
-            var httpclient = new HttpClient();
+            using (var httpclient = new HttpClient())
+            {
                 var Response = await httpclient.GetAsync("https://localhost:5001/api/Product/GetById?id=" + id);
-                var Result = await Response.Content.ReadAsStringAsync();
-                productDetail =  Newtonsoft.Json.JsonConvert.DeserializeObject<ProductDetailPageDto>(Result);    
-                return View(productDetail);
+                if (Response.IsSuccessStatusCode)
+                {
+                    var Result = await Response.Content.ReadAsStringAsync();
+
+                    Product p = Newtonsoft.Json.JsonConvert.DeserializeObject<Product>(Result);
+                    if (p == null) {
+                        return RedirectToAction("Index", "Home");
+                    }
+                    return View(p);
+                }
+                return RedirectToAction("Index", "Home");
+            }
         }
         [HttpGet]
         public async Task<IActionResult> Search(string keyword)

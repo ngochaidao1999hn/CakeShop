@@ -2,6 +2,7 @@
 using CakeShop.Dtos.UserDtos;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Logging;
@@ -43,6 +44,7 @@ namespace CakeShop.WebApp.Controllers
                 if (Response.IsSuccessStatusCode)
                 {
                     token = await Response.Content.ReadAsStringAsync();
+                    HttpContext.Session.SetString("Token", token);
                     var UserClaimPrincipal = ValidateToken(token);
                     var authProperties = new AuthenticationProperties
                     {
@@ -74,6 +76,11 @@ namespace CakeShop.WebApp.Controllers
             validationParameters.IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
             ClaimsPrincipal principal = new JwtSecurityTokenHandler().ValidateToken(jwt, validationParameters,out validatedToken);
             return principal;
+        }
+        public async Task<IActionResult> Logout() {
+            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            HttpContext.Session.Remove("Token");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

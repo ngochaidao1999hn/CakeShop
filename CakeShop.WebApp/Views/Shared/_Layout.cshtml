@@ -93,8 +93,8 @@
                         <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
                     </ul>
                     <ul class="h_search list_style">
-                        <li class="shop_cart">
-                            <a asp-controller="Orders" asp-action="Cart">
+                        <li class="shop_cart" >
+                            <a asp-controller="Orders" asp-action="Cart" id="cart_count">
                                 <i class="fa fa-shopping-cart"></i>
                                 @if (count > 0)
                                 {
@@ -288,10 +288,7 @@
             <p><button id="profile_button"><a asp-controller="User" asp-action="Logout" style="color:white;">Logout</a></button></p>
         </div>
     }
-    else
-    {
-        <p>Nothing</p>
-    }
+  
     <!--================End Profile Area =================-->
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="~/js/jquery-3.2.1.min.js"></script>
