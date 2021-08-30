@@ -21,7 +21,25 @@
     };
     navbarFixed();
 	
-	
+    showSwal = function (type) {
+        'use strict';
+        if (type === 'success-message') {
+            swal({
+                title: 'Congratulations!',
+                text: 'You has added a delicious cake',
+                type: 'success',
+                button: {
+                    text: "Continue",
+                    value: true,
+                    visible: true,
+                    className: "btn btn-primary"
+                }
+            })
+
+        } else {
+            swal("Error occured !");
+        }
+    }
     /*----------------------------------------------------*/
     /*  Main Slider js
     /*----------------------------------------------------*/

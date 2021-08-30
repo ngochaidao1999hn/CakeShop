@@ -2,7 +2,6 @@
 using CakeShop.Domain.Entities;
 using CakeShop.Domain.Interfaces;
 using CakeShop.Dtos.ProductDto;
-using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
