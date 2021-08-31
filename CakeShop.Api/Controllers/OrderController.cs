@@ -57,5 +57,10 @@ namespace CakeShop.Api.Controllers
            await _unitofWork.Commit();
             return Ok();
         }
+        [HttpGet("{User_id}")]
+        public IActionResult Get(Guid User_id) {
+           
+            return Ok(_unitofWork.OrderRepository.GetAll().Result.Where(o => o.Ord_User == User_id && o.Ord_Status!=OrderEnum.Successful).ToList());
+        }
     }
 }

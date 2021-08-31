@@ -4670,46 +4670,7 @@ label {
   letter-spacing: .28px;
 }
 
-.search_area .search_box_inner .input-group input:-moz-placeholder {
-  color: #666;
-  font-family: "Playfair Display", serif;
-  font-size: 14px;
-  letter-spacing: .28px;
-}
 
-.search_area .search_box_inner .input-group input::-moz-placeholder {
-  color: #666;
-  font-family: "Playfair Display", serif;
-  font-size: 14px;
-  letter-spacing: .28px;
-}
-
-.search_area .search_box_inner .input-group input::-webkit-input-placeholder {
-  color: #666;
-  font-family: "Playfair Display", serif;
-  font-size: 14px;
-  letter-spacing: .28px;
-}
-
-.search_area .search_box_inner .input-group .input-group-btn {
-  position: absolute;
-  right: 5px;
-  top: 12px;
-  z-index: 4;
-}
-
-.search_area .search_box_inner .input-group .input-group-btn .btn-default {
-  padding: 0px;
-  border: none;
-  outline: none !important;
-  -webkit-box-shadow: none !important;
-  box-shadow: none !important;
-  background: transparent;
-  color: #666;
-  font-family: "Playfair Display", serif;
-  font-size: 16px;
-  letter-spacing: .28px;
-}
 
 .search_area .mfp-close {
   right: 0px;
@@ -6715,7 +6676,27 @@ a {
   color: #f195b2;
   font-family: "Open Sans", sans-serif;
 }
+#myUL {
+    /* Remove default list styling */
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
 
+    #myUL li a {
+        border: 1px solid #ddd; /* Add a border to all links */
+        margin-top: -1px; /* Prevent double borders */
+        background-color: #f6f6f6; /* Grey background color */
+        padding: 12px; /* Add some padding */
+        text-decoration: none; /* Remove default text underline */
+        font-size: 18px; /* Increase the font-size */
+        color: black; /* Add a black text color */
+        display: block; /* Make it into a block element to fill the whole list */
+    }
+
+        #myUL li a:hover:not(.header) {
+            background-color: #eee; /* Add a hover effect to all links, except for headers */
+        }
 /* End Footer Area css
 ============================================================================================ */
 /*---------------------------------------------------- */

@@ -34,9 +34,11 @@ namespace CakeShop.WebApp.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
-        [HttpGet]
-        public async Task<IActionResult> Search(string keyword)
+        public async Task<JsonResult> Search(string? keyword)
         {
+            if (keyword == null) {
+                return Json(new { });
+            }
             IEnumerable<Product> ProductList;
             using (var httpclient = new HttpClient())
             {
@@ -45,7 +47,7 @@ namespace CakeShop.WebApp.Controllers
                 ProductList = Newtonsoft.Json.JsonConvert.DeserializeObject<IEnumerable<Product>>(result);
             }
             var product_searched = ProductList.Where(p => p.Pro_Name.Contains(keyword));
-            return View(product_searched);
+            return Json(product_searched) ;
        }
     }
 }

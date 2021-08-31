@@ -19,8 +19,8 @@
 <section class="product_details_area p_100">
     <div class="container">
         <div class="row product_d_price">
-            <div class="col-lg-6">
-                <div class="product_img"><img class="img-fluid" src="~/img/product/product-details-1.jpg" alt=""></div>
+            <div class="col-lg-6" id="Flying">
+                <div class="product_img"><img class="img-fluid"  src="~/img/product/product-details-1.jpg" alt=""></div>
             </div>
             <div class="col-lg-6">
                 <div class="product_details_text">
@@ -31,7 +31,7 @@
                         <label for="quantity">Quantity :</label>
                         <input type="text" placeholder="1" value="1" id="Detail_Quantity" >
                     </div>                  
-                    <button class="pink_more" id="btn_AddToCart" data-id="@Model.Pro_Id" onclick="showSwal('success-message')">Add to Cart</button>
+                    <button class="pink_more" id="btn_AddToCart" data-id="@Model.Pro_Id" >Add to Cart</button>
                 </div>
             </div>
         </div>
@@ -66,7 +66,8 @@
         console.log(quantity)
         e.preventDefault();
         $.get('/Orders/AddProductToCart?Pro_id=' + Pro_id + '&Quantity=' + quantity, function (data) {
-
+           
+            flyToElement($(".product_img"), $("#cart_count"));
             if ($("#lblCartCount").val() != null) {
                 $("#lblCartCount").text(parseInt($("#lblCartCount").text()) + parseInt(quantity));
 
@@ -76,6 +77,31 @@
 
         });
     });
+    function flyToElement(flyer, flyingTo) {
+        var divider = 3;
+        var flyerClone = $(flyer).clone();
+        $(flyerClone).css({ position: 'absolute', top: $(flyer).offset().top + "px", left: $(flyer).offset().left + "px", opacity: 1, 'z-index': 1000 });
+        $('body').append($(flyerClone));
+        var gotoX = $(flyingTo).offset().left + ($(flyingTo).width() / 2) - ($(flyer).width() / divider) / 2;
+        var gotoY = $(flyingTo).offset().top + ($(flyingTo).height() / 2) - ($(flyer).height() / divider) / 2;
+
+        $(flyerClone).animate({
+            opacity: 0.4,
+            left: gotoX,
+            top: gotoY,
+            width: $(flyer).width() / divider,
+            height: $(flyer).height() / divider
+        }, 700,
+            function () {
+                $(flyingTo).fadeOut('fast', function () {
+                    $(flyingTo).fadeIn('fast', function () {
+                        $(flyerClone).fadeOut('fast', function () {
+                            $(flyerClone).remove();
+                        });
+                    });
+                });
+            });
+    }
 
 </script>
 

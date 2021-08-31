@@ -20,7 +20,7 @@ namespace CakeShop.WebApp.Controllers
     public class OrdersController : Controller
     {
         private JsonSerializerSettings settings = new JsonSerializerSettings();
-        private CookieOptions options = new CookieOptions();       
+        private CookieOptions options = new CookieOptions();
         public OrdersController() {
             // This tells your serializer that multiple references are okay.
             settings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
@@ -33,7 +33,7 @@ namespace CakeShop.WebApp.Controllers
                 var cart = JsonConvert.DeserializeObject<List<CartViewModel>>(Request.Cookies["cart"]);
                 return View(cart);
             }
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
 
         }
         [Authorize]
@@ -71,8 +71,8 @@ namespace CakeShop.WebApp.Controllers
             var context = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
             using (var httpClient = new HttpClient()) {
                 var token = HttpContext.Session.GetString("Token");
-                httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer "+token);
-               var response = await httpClient.PostAsync("https://localhost:5001/api/Order", context);
+                httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+                var response = await httpClient.PostAsync("https://localhost:5001/api/Order", context);
                 if (response.IsSuccessStatusCode) {
                     Response.Cookies.Delete("cart");
                     TempData["sucess"] = true;
@@ -87,6 +87,11 @@ namespace CakeShop.WebApp.Controllers
 
             }
 
+        }
+        public IActionResult OrderChecking()
+        {
+
+            return View();
         }
         public async Task AddProductToCart(int Pro_id, int Quantity)
         {

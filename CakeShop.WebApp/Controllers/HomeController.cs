@@ -23,10 +23,6 @@ namespace CakeShop.WebApp.Controllers
 
         public async Task<IActionResult> Index()
         {
-            if (TempData["success"] != null) {
-                ViewBag.success = true;
-                TempData["success"] = null;
-            }
             List<Product> ListProduct = new List<Product>();
             using (var httpclient = new HttpClient()) {
                 var response = await httpclient.GetAsync("https://localhost:5001/api/product");

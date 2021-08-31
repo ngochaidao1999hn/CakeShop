@@ -44,7 +44,7 @@
                 <div class="row product_item_inner">
                     @foreach (var item in Model)
                     {
-                        <div class="col-lg-4 col-md-4 col-6">
+                        <div class="col-lg-4 col-md-4 col-6 shop_list_item">
                             <div class="cake_feature_item">
                                 <div class="cake_img">
                                     <img src="img/cake-feature/c-feature-1.jpg" alt="">
@@ -99,7 +99,7 @@
                 <div class="product_left_sidebar">
                     <aside class="left_sidebar search_widget">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Enter Search Keywords">
+                            <input type="text" class="form-control" id="search-input" placeholder="Enter Search Keywords">
                             <div class="input-group-append">
                                 <button class="btn" type="button"><i class="icon icon-Search"></i></button>
                             </div>
@@ -192,3 +192,37 @@
     </div>
 </section>
 <!--================End Product Area =================-->
+<script src="~/js/jquery-3.2.1.min.js"></script>
+<script>
+    $("#search-input").on('keyup', function (e) {
+        var keyword = $(this).val();
+        console.log(keyword);
+        $.get('/Products/Search?keyword=' + keyword, function (data) {
+            if (data != null) {
+                $(".shop_list_item").remove();
+            }
+            console.log(data);
+            $.each(data, function (index, value) {
+                console.log(value);
+                var html = '';
+                html += ' <div class="col-lg-4 col-md-4 col-6 shop_list_item">'
+                    + '<div class="cake_feature_item">'
+                    + ' <div class="cake_img">'
+                    + '<img src="img/cake-feature/c-feature-1.jpg" alt="">'
+                    + ' </div>'
+                    + '<div class="cake_text">'
+                    + '<h4>' + new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(value.pro_Price) + '</h4>'
+                    + '<h3>' + value.pro_Name + '</h3>'
+                    + '<a class="pest_btn" href="/Products/Detail/'+ value.pro_Id+'">Add to cart</a>'
+                    + '</div>'
+                    + '</div>'
+                    + ' </div>';
+                console.log(html);
+                $(".product_item_inner").append(html);
+            });
+        });
+
+        });
+
+
+</script>
