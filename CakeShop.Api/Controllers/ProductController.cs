@@ -39,5 +39,9 @@ namespace CakeShop.Api.Controllers
         {
             return Ok(await _unitofWork.ProductRepository.GetProductListWithCategory(Cate_id));
         }
+        [HttpGet("GettopSeller")]
+        public async Task<IActionResult> GetTopSeller() {
+            return Ok(await _unitofWork.ProductRepository.GetTopSaleProducts());
+        }
     }
 }

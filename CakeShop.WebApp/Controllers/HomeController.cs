@@ -25,7 +25,7 @@ namespace CakeShop.WebApp.Controllers
         {
             List<Product> ListProduct = new List<Product>();
             using (var httpclient = new HttpClient()) {
-                var response = await httpclient.GetAsync("https://localhost:5001/api/product");
+                var response = await httpclient.GetAsync("https://localhost:5001/api/product/GettopSeller");
                 var result = await response.Content.ReadAsStringAsync();
                 ListProduct = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Product>>(result);
             }          

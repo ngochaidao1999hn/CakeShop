@@ -3,6 +3,14 @@
 @{
     ViewData["Title"] = "Login";
     Layout = "_Layout";
+    RegisterInfo registerform = null;
+    if (ViewBag.RegisterForm == null)
+    {
+        registerform = new RegisterInfo();
+    }
+    else {
+        registerform = ViewBag.RegisterForm as RegisterInfo;
+    }
 }
 <section class="banner_area">
     <div class="container">
@@ -47,25 +55,38 @@
                 <div class="main_title">
                     <h2>Register</h2>
                 </div>
-                <form class="row contact_us_form" action="http://galaxyanalytics.net/demos/cake/theme/cake-html/contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+                <form class="row contact_us_form" asp-action="Register" asp-controller="User" method="post" id="registrationform" >
                     <div class="form-group col-md-6">
-                        <input type="text" class="form-control" id="name" name="FirstName" placeholder="Your first name">
+                        <input type="text" class="form-control" id="name" asp-for="@registerform.FirstName" placeholder="Your first name" required autocomplete="off">
                     </div>
                     <div class="form-group col-md-6">
-                        <input type="text" class="form-control" id="name" name="Last Name" placeholder="Your last name">
+                        <input type="text" class="form-control" id="name" asp-for="@registerform.LastName" placeholder="Your last name" required autocomplete="off">
                     </div>
                     <div class="form-group col-md-12">
-                        <input type="email" class="form-control" id="email" name="Email" placeholder="Email address">
+                        <input type="email" class="form-control" id="email" asp-for="@registerform.Email" placeholder="Email address" required autocomplete="off">
                     </div>
                     <div class="form-group col-md-12">
-                        <input type="text" class="form-control" id="adress" name="Adress" placeholder="Your adress">
+                        <input type="text" class="form-control" id="adress" asp-for="@registerform.Adress" placeholder="Your adress" required autocomplete="off">
                     </div>
                     <div class="form-group col-md-12">
-                        <input type="date" class="form-control" id="dob" name="Dob" placeholder="Your BirthDay">
+                        <input type="date" class="form-control" id="dob" asp-for="@registerform.Dob" placeholder="Your BirthDay" required autocomplete="off">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <input type="text" class="form-control" id="phone" asp-for="@registerform.PhoneNumber" placeholder="Your Phone number" required autocomplete="off">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <input type="text" class="form-control" id="username" asp-for="@registerform.UserName" placeholder="Your UserName" required autocomplete="off">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <input type="password" class="form-control" id="password" asp-for="@registerform.Password" placeholder="Your Password" required>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <input type="password" class="form-control" id="confirm" asp-for="@registerform.ConfirmPassword" placeholder="Confirm your password" required>
                     </div>
                     <div class="form-group col-md-12">
                         <button type="submit" value="submit" class="btn order_s_btn form-control">Register</button>
                     </div>
+                    <span style="color:red;">@ViewBag.ErrorRegister</span>
                 </form>
             </div>
 

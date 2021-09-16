@@ -13,5 +13,6 @@ namespace CakeShop.Domain.Interfaces
         Task<IEnumerable<Product>> GetProductWithPage(int Page);
         Task<IEnumerable<Product>> GetProductListWithCategory(int Cate_id);
         Task<ProductDetailPageDto> GetProductDetailwithSimilarProduct(int Pro_id);
+        Task<IEnumerable<Product>> GetTopSaleProducts();
     }
 }

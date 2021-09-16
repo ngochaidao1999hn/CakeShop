@@ -4,7 +4,7 @@
 @using System.Globalization;
 @{
     int count = 0;
-  
+
     if (Context.Request.Cookies["cart"] != null)
     {
         List<CartViewModel> list = JsonConvert.DeserializeObject<List<CartViewModel>>(Context.Request.Cookies["cart"]);
@@ -33,6 +33,8 @@
     {
         user = null;
     }
+    var successMessage = TempData["success"];
+    TempData["success"] = null;
 
 }
 <!DOCTYPE html>
@@ -75,11 +77,18 @@
     <![endif]-->
 </head>
 <body>
+    
 
     <!--================Main Header Area =================-->
     <header class="main_header_area five_header">
         <div class="top_header_area row m0">
             <div class="container">
+                @if (successMessage != null)
+                {
+                <div class="alert alert-success" id="success_message">
+                    @successMessage;
+                </div>
+                }
                 <div class="float-left">
                     <a href="tell:+84932229913"><i class="fa fa-phone" aria-hidden="true"></i> + (84) 932229913</a>
                     <a href="mainto:info@cakebakery.com"><i class="fa fa-envelope-o" aria-hidden="true"></i> ngochai.dao1999@gmail.com</a>
@@ -92,7 +101,7 @@
                         <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
                     </ul>
                     <ul class="h_search list_style">
-                        <li class="shop_cart" >
+                        <li class="shop_cart">
                             <a asp-controller="Orders" asp-action="Cart" id="cart_count">
                                 <i class="fa fa-shopping-cart"></i>
                                 @if (count > 0)
@@ -177,6 +186,7 @@
             </div>
         </div>
     </header>
+
     <!--================End Main Header Area =================-->
     @RenderBody()
     <!--================Newsletter Area =================-->
@@ -256,7 +266,7 @@
                 </div>
             </div>
         </div>
-       
+
     </footer>
     <!--================End Footer Area =================-->
     <!--================Search Box Area =================-->
@@ -266,8 +276,8 @@
                 <h3>Search</h3>
                 <div class="input-group layout_search_div">
                     <input type="text" class="form-control" id="layout_search_input" name="keyword" placeholder="Search for...">
-                    
-                    
+
+
                 </div>
             </div>
         </form>
@@ -286,7 +296,7 @@
             <p><button id="profile_button"><a asp-controller="User" asp-action="Logout" style="color:white;">Logout</a></button></p>
         </div>
     }
-  
+
     <!--================End Profile Area =================-->
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="~/js/jquery-3.2.1.min.js"></script>
@@ -312,6 +322,11 @@
 
     <script src="~/js/theme.js"></script>
     <script src="~/js/site.js"></script>
+    <script>
+        $("#success_message").fadeIn("slow", function () {
+            $(this).fadeOut(3000);
+        });
+    </script>
 </body>
 
 </html>

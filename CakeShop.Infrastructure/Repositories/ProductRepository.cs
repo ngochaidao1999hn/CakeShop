@@ -59,5 +59,11 @@ namespace CakeShop.Infrastructure.Repositories
             return ListProduct;
 
         }
+
+        public async Task<IEnumerable<Product>> GetTopSaleProducts()
+        {
+            IEnumerable<Product> topSellerList = await _context.Products.FromSqlRaw("getTop5BestSeller").ToListAsync();
+            return topSellerList;
+        }
     }
 }

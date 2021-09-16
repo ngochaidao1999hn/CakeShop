@@ -75,7 +75,7 @@ namespace CakeShop.WebApp.Controllers
                 var response = await httpClient.PostAsync("https://localhost:5001/api/Order", context);
                 if (response.IsSuccessStatusCode) {
                     Response.Cookies.Delete("cart");
-                    TempData["sucess"] = true;
+                    TempData["success"] = "Order Complete";
                     return RedirectToAction("Index", "Home");
                 }
                 else

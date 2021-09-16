@@ -61,11 +61,7 @@ namespace CakeShop.WebApp.Controllers
                     return View(LoginRequest);
                 }
             }                                        
-        }
-        [HttpPost]
-        public IActionResult Register(RegisterInfo RegisterRequest) {
-            return View();
-        }
+        }       
         private ClaimsPrincipal ValidateToken(string jwt) {
             IdentityModelEventSource.ShowPII = true;
             SecurityToken validatedToken;
@@ -78,9 +74,30 @@ namespace CakeShop.WebApp.Controllers
             return principal;
         }
         public async Task<IActionResult> Logout() {
-            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+           await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             HttpContext.Session.Remove("Token");
             return RedirectToAction("Index", "Home");
+        }
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterInfo registerform) {
+            if (!ModelState.IsValid) {
+                ViewBag.RegisterForm = registerform;
+                return RedirectToAction("Login");
+            }
+            var json = Newtonsoft.Json.JsonConvert.SerializeObject(registerform);
+            var context = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
+            using (var httpclient = new HttpClient()) {
+                var response = await httpclient.PostAsync("https://localhost:5001/api/User/register", context);
+                if (response.IsSuccessStatusCode) {
+                    TempData["success"] = "Register successful";
+                    return RedirectToAction("Index", "Home");
+                }
+                var errorRegister = await response.Content.ReadAsStringAsync();
+                ViewBag.ErrorRegister = errorRegister;
+                ViewBag.RegisterForm = registerform;
+                return RedirectToAction("Login");
+            }
+        
         }
     }
 }
