@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace CakeShop.WebApp.Controllers
 {
-    public class OrdersController : Controller
+    public class OrdersController : BaseController
     {
         private JsonSerializerSettings settings = new JsonSerializerSettings();
         private CookieOptions options = new CookieOptions();

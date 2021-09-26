@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CakeShop.WebApp.Controllers
 {
-    public class ProductsController : Controller
+    public class ProductsController : BaseController
     {
         public IActionResult Index()
         {

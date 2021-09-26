@@ -1,4 +1,5 @@
 ﻿using CakeShop.Domain.Entities;
+using CakeShop.Dtos.CategoryDto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,6 @@ namespace CakeShop.Domain.Interfaces
 {
     public interface ICategoryRepository:IRepository<Category>
     {
+        Task<List<CategoryWithProductCount>> getCategoriesWithProductCount();
     }
 }

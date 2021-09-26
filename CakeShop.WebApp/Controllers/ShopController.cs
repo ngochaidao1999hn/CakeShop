@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CakeShop.WebApp.Controllers
 {
-    public class ShopController : Controller
+    public class ShopController : BaseController
     {
         public async Task<IActionResult> Index(int? page)
         {
@@ -38,7 +38,9 @@ namespace CakeShop.WebApp.Controllers
             }
             
             ViewBag.ShopViewModel = viewmodel;
-            ViewBag.CurrentPage = page; 
+            ViewBag.CurrentPage = page;
+            ViewBag.top5Seller = top5Seller;
+            ViewBag.Categories = categoryWithProducts;
             return View(ListProductbyPage);
         }
     }

@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 
 namespace CakeShop.WebApp.Controllers
 {
-    public class UserController : Controller
+    public class UserController : BaseController
     {
         private IConfiguration _configuration;
         public UserController(IConfiguration configuration) {

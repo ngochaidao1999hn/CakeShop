@@ -1,8 +1,8 @@
-﻿@model IEnumerable<Product>;
-@using CakeShop.Domain.Entities;
+﻿@using CakeShop.Domain.Entities;
 @using System.Globalization;
 @{
     ViewData["Title"] = "Home Page";
+    var top5Seller = ViewBag.top5Seller as List<Product>;
 
 }
 @if (ViewBag.success != null) { 
@@ -32,7 +32,7 @@
                          data-type="text"
                          data-responsive_offset="on"
                          data-frames="[{&quot;delay&quot;:10,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;&quot;,&quot;mask&quot;:&quot;x:0px;y:0px;s:inherit;e:inherit;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power2.easeInOut&quot;},{&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;y:[175%];&quot;,&quot;mask&quot;:&quot;x:inherit;y:inherit;s:inherit;e:inherit;&quot;,&quot;ease&quot;:&quot;Power2.easeInOut&quot;}]"
-                         data-textAlign="['left','left','left','left']"><h3>@Model.First().Pro_Price</h3></div>
+                         data-textAlign="['left','left','left','left']"><h3>@top5Seller.First().Pro_Price</h3></div>
 
                     <div class="tp-caption tp-resizeme first_text"
                          data-x="['right','right','left','15','15','15']" data-hoffset="['-150','0','15','15','15','0']"
@@ -46,7 +46,7 @@
                          data-type="text"
                          data-responsive_offset="on"
                          data-frames="[{&quot;delay&quot;:10,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;&quot;,&quot;mask&quot;:&quot;x:0px;y:0px;s:inherit;e:inherit;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power2.easeInOut&quot;},{&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;y:[175%];&quot;,&quot;mask&quot;:&quot;x:inherit;y:inherit;s:inherit;e:inherit;&quot;,&quot;ease&quot;:&quot;Power2.easeInOut&quot;}]"
-                         data-textAlign="['left','left','left','left']">@Model.First().Pro_Name </div>
+                         data-textAlign="['left','left','left','left']">@top5Seller.First().Pro_Name </div>
 
                     <div class="tp-caption tp-resizeme secand_text"
                          data-x="['right','right','left','15','15','15']"
@@ -61,7 +61,7 @@
                          data-responsive_offset="on"
                          data-transform_idle="o:1;"
                          data-frames="[{&quot;delay&quot;:10,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;&quot;,&quot;mask&quot;:&quot;x:0px;y:[100%];s:inherit;e:inherit;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power2.easeInOut&quot;},{&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;y:[175%];&quot;,&quot;mask&quot;:&quot;x:inherit;y:inherit;s:inherit;e:inherit;&quot;,&quot;ease&quot;:&quot;Power2.easeInOut&quot;}]">
-                        @Model.First().Pro_Description
+                        @top5Seller.First().Pro_Description 
                     </div>
 
                     <div class="tp-caption tp-resizeme slider_button"
@@ -75,7 +75,7 @@
                          data-type="text"
                          data-responsive_offset="on"
                          data-frames="[{&quot;delay&quot;:10,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;&quot;,&quot;mask&quot;:&quot;x:0px;y:[100%];s:inherit;e:inherit;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power2.easeInOut&quot;},{&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;y:[175%];&quot;,&quot;mask&quot;:&quot;x:inherit;y:inherit;s:inherit;e:inherit;&quot;,&quot;ease&quot;:&quot;Power2.easeInOut&quot;}]">
-                        <a class="main_btn" asp-controller="Products" asp-action="Detail" asp-route-id="@Model.First().Pro_Id">Purchase now</a>
+                        <a class="main_btn" asp-controller="Products" asp-action="Detail" asp-route-id="@top5Seller.First().Pro_Id">Purchase now</a>
                     </div>
                 </div>
             </li>
@@ -318,11 +318,11 @@
                     </div>
                 </div>
                 <div class="float-right">
-                    <a class="pest_btn" href="#">View all Products</a>
+                    <a class="pest_btn" asp-controller="Shop" asp-action="Index">View all Products</a>
                 </div>
             </div>
             <div class="cake_feature_slider owl-carousel">
-                @foreach (var item in Model)
+                @foreach (var item in top5Seller)
                 {
                     <div class="item">
                         <div class="cake_feature_item">

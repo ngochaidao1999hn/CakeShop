@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace CakeShop.WebApp.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;
 
@@ -23,13 +23,14 @@ namespace CakeShop.WebApp.Controllers
 
         public async Task<IActionResult> Index()
         {
-            List<Product> ListProduct = new List<Product>();
-            using (var httpclient = new HttpClient()) {
-                var response = await httpclient.GetAsync("https://localhost:5001/api/product/GettopSeller");
-                var result = await response.Content.ReadAsStringAsync();
-                ListProduct = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Product>>(result);
-            }          
-            return View(ListProduct);
+            //List<Product> ListProduct = new List<Product>();
+            //using (var httpclient = new HttpClient()) {
+            //    var response = await httpclient.GetAsync("https://localhost:5001/api/product/GettopSeller");
+            //    var result = await response.Content.ReadAsStringAsync();
+            //    ListProduct = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Product>>(result);
+            //}          
+            ViewBag.top5Seller = top5Seller;
+            return View();
         }
         public async Task<IActionResult> Menu() {
             List<Product> ListProduct = new List<Product>();
@@ -47,10 +48,15 @@ namespace CakeShop.WebApp.Controllers
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        //public IActionResult Error()
+        //{
+        //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        //}
+        [Route("/NotFound")]
+        public IActionResult PageNotFound()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View();
         }
     }
 }
