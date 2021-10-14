@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CakeShop.WebApp", "CakeShop
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CakeShop.Dtos", "CakeShop.Dtos\CakeShop.Dtos.csproj", "{35F3BCFD-9C5A-4224-B9C7-F93E7D55FD94}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CakeShop.AdminApp", "CakeShop.AdminApp\CakeShop.AdminApp.csproj", "{8C0263B5-D619-47CC-ABFA-C04C3C508CB7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{35F3BCFD-9C5A-4224-B9C7-F93E7D55FD94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35F3BCFD-9C5A-4224-B9C7-F93E7D55FD94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35F3BCFD-9C5A-4224-B9C7-F93E7D55FD94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C0263B5-D619-47CC-ABFA-C04C3C508CB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C0263B5-D619-47CC-ABFA-C04C3C508CB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C0263B5-D619-47CC-ABFA-C04C3C508CB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C0263B5-D619-47CC-ABFA-C04C3C508CB7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

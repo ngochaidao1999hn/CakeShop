@@ -19,6 +19,7 @@ namespace CakeShop.Domain.Entities
         public int Pro_Category { get; set; }
         public Category Category { get; set; }
         public ICollection<OrderDetail> OrderDetails { get; set; }
-        
+        public NutrientFact NutrientFacts { get; set; }
+
     }
 }
