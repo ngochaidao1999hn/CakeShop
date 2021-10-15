@@ -62,5 +62,11 @@ namespace CakeShop.Api.Controllers
            
             return Ok(_unitofWork.OrderRepository.GetAll().Result.Where(o => o.Ord_User == User_id && o.Ord_Status!=OrderEnum.Successful).ToList());
         }
+        [HttpGet("GetAll")]
+        public IActionResult GetAll() {
+            var list = _unitofWork.OrderRepository.GetAll().Result.ToList();
+            return Ok(list);
+        }
     }
+    
 }
