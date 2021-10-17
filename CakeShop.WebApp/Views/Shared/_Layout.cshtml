@@ -145,41 +145,15 @@
                             <li><a href="cake.html">Our Cakes</a></li>
                             <li><a asp-controller="Home" asp-action="Menu">Menu</a></li>
                             <li class="dropdown submenu">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">About Us</a>
+                                <a class="dropdown-toggle" data-toggle="dropdown" asp-controller="Home" asp-action="AboutUs" role="button" aria-haspopup="true" aria-expanded="false">About Us</a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="about-us.html">About Us</a></li>
+                                    <li><a asp-controller="Home" asp-action="AboutUs">About Us</a></li>
                                     <li><a href="our-team.html">Our Chefs</a></li>
                                     <li><a href="testimonials.html">Testimonials</a></li>
                                 </ul>
                             </li>
                             <li><a asp-controller="Shop" asp-action="Index">Shop</a></li>
-                            <li class="dropdown submenu">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Pages</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="service.html">Services</a></li>
-                                    <li class="dropdown submenu">
-                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Gallery</a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="portfolio.html">-  Gallery Classic</a></li>
-                                            <li><a href="portfolio-full-width.html">-  Gallery Full width</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="faq.html">Faq</a></li>
-                                    <li><a href="what-we-make.html">What we make</a></li>
-                                    <li><a href="special.html">Special Recipe</a></li>
-                                    <li><a href="404.html">404 page</a></li>
-                                    <li><a href="comming-soon.html">Coming Soon page</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown submenu">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="blog.html">Blog with sidebar</a></li>
-                                    <li><a href="blog-2column.html">Blog 2 column</a></li>
-                                    <li><a href="single-blog.html">Blog details</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="contact.html">Contact Us</a></li>
+                            
                         </ul>
                     </div>
                 </nav>

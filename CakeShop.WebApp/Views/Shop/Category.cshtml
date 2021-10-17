@@ -61,48 +61,53 @@
                         </div>
                     }
                 </div>
-              
-                <div class="product_pagination">
-                    <div class="left_btn">
-                        @if (ViewBag.CurrentPage != 1)
+                @*@if (viewmodel != null)
+                {
+                    <div class="product_pagination">
+                        <div class="left_btn">
+                            @if (ViewBag.CurrentPage != 1)
+                            {
+                                <a asp-controller="Shop" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage - 1)"><i class="lnr lnr-arrow-left"></i> New posts</a>
+                            }
+                        </div>
+                        <div class="middle_list">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                    @if (ViewBag.CurrentPage < viewmodel.PageTotal - 2)
+                                    {
+                                        @for (int i = ViewBag.CurrentPage; i <= ViewBag.CurrentPage + 2; i++)
+                                        {
+                                            <li class="page-item"><a class="page-link" asp-controller="Shop" asp-action="Index" asp-route-page="@i">@i</a></li>
+                                        }
+
+                                        <li class="page-item"><a class="page-link" asp-controller="Shop" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage + 3)">...</a></li>
+                                        <li class="page-item"><a class="page-link" asp-controller="Shop" asp-action="Index" asp-route-page="@viewmodel.PageTotal">@viewmodel.PageTotal</a></li>
+                                    }
+                                    else
+                                    {
+                                        @for (int i = ViewBag.CurrentPage; i <= viewmodel.PageTotal; i++)
+                                        {
+                                            <li class="page-item"><a class="page-link" asp-controller="Shop" asp-action="Index" asp-route-page="@i">@i</a></li>
+                                        }
+
+                                    }
+                                </ul>
+                            </nav>
+                        </div>
+                        @if (ViewBag.CurrentPage < viewmodel.PageTotal)
                         {
-                            <a asp-controller="Shop" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage - 1)"><i class="lnr lnr-arrow-left"></i> New posts</a>
+                            <div class="right_btn"><a asp-controller="Shop" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage + 1)">Older posts <i class="lnr lnr-arrow-right"></i></a></div>
                         }
+
+
                     </div>
-                    <div class="middle_list">
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination">
-                                @if (ViewBag.CurrentPage < viewmodel.PageTotal - 2)
-                                {
-                                    @for (int i = ViewBag.CurrentPage; i <= ViewBag.CurrentPage + 2; i++)
-                                    {
-                                        <li class="page-item"><a class="page-link" asp-controller="Shop" asp-action="Index" asp-route-page="@i">@i</a></li>
-                                    }
-
-                                    <li class="page-item"><a class="page-link" asp-controller="Shop" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage + 3)">...</a></li>
-                                    <li class="page-item"><a class="page-link" asp-controller="Shop" asp-action="Index" asp-route-page="@viewmodel.PageTotal">@viewmodel.PageTotal</a></li>
-                                }
-                                else
-                                {
-                                    @for (int i = ViewBag.CurrentPage; i <= viewmodel.PageTotal; i++)
-                                    {
-                                        <li class="page-item"><a class="page-link" asp-controller="Shop" asp-action="Index" asp-route-page="@i">@i</a></li>
-                                    }
-
-                                }
-                            </ul>
-                        </nav>
-                    </div>
-                    @if (ViewBag.CurrentPage < viewmodel.PageTotal)
-                    {
-                        <div class="right_btn"><a asp-controller="Shop" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage + 1)">Older posts <i class="lnr lnr-arrow-right"></i></a></div>
-                    }
-
-
-                </div>
-                
+                }
+                else
+                {
+                    <div style="display:none;"></div>
+                }*@
             </div>
-                
+
             <div class="col-lg-3">
                 <div class="product_left_sidebar">
                     <aside class="left_sidebar search_widget">
